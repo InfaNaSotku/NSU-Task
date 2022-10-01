@@ -127,7 +127,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Expression\DoubleExpression\Add\Add.cpp" />
+    <ClCompile Include="Expression\DoubleExpression\Div\Div.cpp" />
+    <ClCompile Include="Expression\DoubleExpression\Mul\Mul.cpp" />
+    <ClCompile Include="Expression\DoubleExpression\Sub\Sub.cpp" />
+    <ClCompile Include="Expression\Expression.cpp" />
+    <ClCompile Include="Expression\SingleExpression\Number\Number.cpp" />
+    <ClCompile Include="Expression\SingleExpression\Variable\Variable.cpp" />
+    <ClCompile Include="PolishExpr\PolishExpr.cpp" />
     <ClCompile Include="Task2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Expression\DoubleExpression\Add\Add.h" />
+    <ClInclude Include="Expression\DoubleExpression\Div\Div.h" />
+    <ClInclude Include="Expression\DoubleExpression\Mul\Mul.h" />
+    <ClInclude Include="Expression\DoubleExpression\Sub\Sub.h" />
+    <ClInclude Include="Expression\Expression.h" />
+    <ClInclude Include="Expression\SingleExpression\Number\Number.h" />
+    <ClInclude Include="Expression\SingleExpression\Variable\Variable.h" />
+    <ClInclude Include="PolishExpr\PolishExpr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

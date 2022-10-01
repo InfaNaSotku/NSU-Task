@@ -13,10 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\PolishExpr">
+      <UniqueIdentifier>{0c2ca6fa-8ba7-4463-b9a2-511b3c21e500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\PolishExpr">
+      <UniqueIdentifier>{39fef27d-a7b3-4208-b75d-0d29c542da6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Expression">
+      <UniqueIdentifier>{a553f87e-1b41-4446-87cf-ce72df0a07d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Expression\DoubleExpression">
+      <UniqueIdentifier>{a085291c-5c2b-4ccb-bcd9-176eca73bf86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Expression\SingleExpression">
+      <UniqueIdentifier>{4dd33f9d-edf0-407d-9270-003dbff62b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Expression">
+      <UniqueIdentifier>{bfa932f2-a02e-4d30-9b6a-d1513629db26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Expression\DoubleExpression">
+      <UniqueIdentifier>{dd85c2e5-baee-4188-93bf-b50127364ba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Expression\SingleExpression">
+      <UniqueIdentifier>{87ac04d3-f001-49a1-be34-ccbe49aeeff3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Task2.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="PolishExpr\PolishExpr.cpp">
+      <Filter>Исходные файлы\PolishExpr</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\Expression.cpp">
+      <Filter>Исходные файлы\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\DoubleExpression\Add\Add.cpp">
+      <Filter>Исходные файлы\Expression\DoubleExpression</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\DoubleExpression\Div\Div.cpp">
+      <Filter>Исходные файлы\Expression\DoubleExpression</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\DoubleExpression\Mul\Mul.cpp">
+      <Filter>Исходные файлы\Expression\DoubleExpression</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\DoubleExpression\Sub\Sub.cpp">
+      <Filter>Исходные файлы\Expression\DoubleExpression</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\SingleExpression\Number\Number.cpp">
+      <Filter>Исходные файлы\Expression\SingleExpression</Filter>
+    </ClCompile>
+    <ClCompile Include="Expression\SingleExpression\Variable\Variable.cpp">
+      <Filter>Исходные файлы\Expression\SingleExpression</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PolishExpr\PolishExpr.h">
+      <Filter>Файлы заголовков\PolishExpr</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\Expression.h">
+      <Filter>Файлы заголовков\Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\DoubleExpression\Add\Add.h">
+      <Filter>Файлы заголовков\Expression\DoubleExpression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\DoubleExpression\Div\Div.h">
+      <Filter>Файлы заголовков\Expression\DoubleExpression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\DoubleExpression\Mul\Mul.h">
+      <Filter>Файлы заголовков\Expression\DoubleExpression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\DoubleExpression\Sub\Sub.h">
+      <Filter>Файлы заголовков\Expression\DoubleExpression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\SingleExpression\Number\Number.h">
+      <Filter>Файлы заголовков\Expression\SingleExpression</Filter>
+    </ClInclude>
+    <ClInclude Include="Expression\SingleExpression\Variable\Variable.h">
+      <Filter>Файлы заголовков\Expression\SingleExpression</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
