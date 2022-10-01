@@ -33,4 +33,7 @@
       <Filter>Файлы заголовков\Matrix</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Task1Condition.pdf" />
+  </ItemGroup>
 </Project>

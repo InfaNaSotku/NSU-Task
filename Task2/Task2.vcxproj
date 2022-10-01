@@ -147,6 +147,9 @@
     <ClInclude Include="Expression\SingleExpression\Variable\Variable.h" />
     <ClInclude Include="PolishExpr\PolishExpr.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Task2Condition.pdf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

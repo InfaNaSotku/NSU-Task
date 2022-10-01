@@ -93,4 +93,7 @@
       <Filter>Файлы заголовков\Expression\SingleExpression</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Task2Condition.pdf" />
+  </ItemGroup>
 </Project>
