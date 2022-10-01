@@ -2,9 +2,12 @@
 #include"../PolishExpr/PolishExpr.h"
 string Expression::GetUnknownValue(const string unknowns, const string unknown)
 {
-	int pos = unknowns.find(unknown);
+	string temp = unknown;
+	if (unknown[0] == '-')//унарка
+		temp.erase(temp.begin());
+	int pos = unknowns.find(temp);
 	if (pos >= 0)
-		return unknowns.substr(pos + 4 + unknown.size(), unknowns.find(';', pos + 5) - pos - 5);
+		return unknowns.substr(pos + 4 + temp.size(), unknowns.find(';', pos + 5) - pos - 5);
 	else
 		return "";
 }
@@ -20,6 +23,18 @@ Expression* get_next_expr(string& val)
 	if (val[rpos] == ' ')//такого быть не должно
 		throw exception("Bad val");
 	int lpos = rpos;
+	bool tilda = false;
+	if (val[rpos] == '~')
+	{
+		tilda = true;
+		val = val.substr(0, rpos);
+		rpos = val.size() - 1;
+		while (val[rpos] == ' ' && rpos > 0)
+			rpos--;
+		if (val[rpos] == ' ')//такого быть не должно
+			throw exception("Bad val");
+		lpos = rpos;
+	}
 	if (isdigit(val[rpos]))
 	{
 		while (lpos > 0)
@@ -27,11 +42,12 @@ Expression* get_next_expr(string& val)
 				lpos--;
 			else
 				break;
-		if (val[lpos] == '~')
-			val[lpos] = '-';
 		string temp = val.substr(lpos, rpos - lpos + 1);
 		val = val.substr(0, lpos);
-		return new Number(stoi(temp));
+		if(tilda)
+			return new Number(-stoi(temp));
+		else
+			return new Number(stoi(temp));
 		//cout << stoi(val.substr(lpos, rpos - lpos + 1));
 	}
 	else if (isalpha(val[rpos]))
@@ -43,6 +59,8 @@ Expression* get_next_expr(string& val)
 				break;
 		string temp = val.substr(lpos, rpos - lpos + 1);
 		val = val.substr(0, lpos);
+		if(tilda)
+			temp.insert(temp.begin(), '-');
 		return new Variable(temp);
 	}
 	else

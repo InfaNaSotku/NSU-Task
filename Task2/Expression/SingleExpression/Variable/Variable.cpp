@@ -18,8 +18,18 @@ void Variable::print()
 
 Expression* Variable::derivative(const string unknown)
 {
-	if(this->val_ == unknown)
-		return new Number(1);
+	string temp = this->val_;
+	bool tilda = false;
+	if (temp[0] == '-')//унарный минус
+	{
+		temp.erase(temp.begin());
+		tilda = true;
+	}
+	if (temp == unknown)
+		if (tilda)
+			return new Number(-1);
+		else
+			return new Number(1);
 	else
 		return new Number(0);
 }
@@ -28,7 +38,10 @@ int Variable::eval(const string unknowns)
 {
 	string temp = this->GetUnknownValue(unknowns, this->val_);
 	if (temp.size())
-		return stoi(temp);
+		if (this->val_[0] == '-')
+			return -stoi(temp);
+		else
+			return stoi(temp);
 	else
 		throw exception("Unknown doesn't exist!");
 }
