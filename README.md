@@ -1,0 +1,1 @@
+My tasks decision upon couple of programming at NSU, second course
