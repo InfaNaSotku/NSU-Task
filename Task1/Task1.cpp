@@ -17,6 +17,7 @@ int main()
 	Matrix A(n), B(n), C(n), D(n);
 	cin >> A >> B >> C >> D;
 	cout << (A + (B * (-C)) + K) * (-D);
+
 	//доп задача со стоблцами
 	/*int n;
 	cin >> n;

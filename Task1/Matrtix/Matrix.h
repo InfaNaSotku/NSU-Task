@@ -30,7 +30,7 @@ public:
 		int& operator[](const size_t&);
 	};
 
-	MyMatrixColumn operator()(const size_t& pos);
+	MyMatrixColumn& operator()(const size_t& pos);
 	//доп задача конец
 
 	bool operator!=(const Matrix& s);
