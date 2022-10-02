@@ -15,7 +15,7 @@ Matrix::~Matrix()
 {
 	for (size_t i = 0; i < this->m_matrix_size_; i++)
 	{
-		delete this->m_matrix_[i];
+		delete[] this->m_matrix_[i];
 	}
 	delete[] this->m_matrix_;
 }
@@ -62,7 +62,7 @@ int* Matrix::operator[](const size_t& pos) const
 	}
 	return this->m_matrix_[pos];
 }
-int Matrix::MyMatrixColumn::operator[](const size_t& pos)
+int& Matrix::MyMatrixColumn::operator[](const size_t& pos)
 {
 	return this->m_matrix_ptr_->m_matrix_[pos][this->cur_colomn_pos_];
 }
@@ -179,18 +179,23 @@ Matrix Matrix::operator-()
 Matrix& Matrix::operator=(const Matrix& matrix)
 {
 	this->m_matrix_size_ = matrix.m_matrix_size_;
-	delete[] this->m_matrix_;
+	if (this->m_matrix_)
+	{
+		for (int i = 0; i < this->m_matrix_size_; i++)
+		{
+			delete[] this->m_matrix_[i];
+		}
+		delete[] this->m_matrix_;
+	}
 	this->m_matrix_ = new int* [this->m_matrix_size_];
-	int** temp_matrix = new int* [this->m_matrix_size_];
 
 	for (size_t i = 0; i < this->m_matrix_size_; i++)
 	{
-		int* temp_line = new int[this->m_matrix_size_];
+		this->m_matrix_[i] = new int[this->m_matrix_size_];
 		for (size_t j = 0; j < this->m_matrix_size_; j++)
 		{
-			temp_line[j] = matrix[i][j];
+			this->m_matrix_[i][j] = matrix[i][j];
 		}
-		this->m_matrix_[i] = temp_line;
 	}
 	return *this;
 }
