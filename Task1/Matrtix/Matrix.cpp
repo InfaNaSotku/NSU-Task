@@ -52,7 +52,7 @@ int* Matrix::operator[](const size_t& pos)
 	{
 		throw invalid_argument("Bad size");
 	}
-	return this->m_matrix_[pos];
+	return this->m_matrix_[pos-1];
 }
 int* Matrix::operator[](const size_t& pos) const
 {
@@ -66,7 +66,7 @@ int& Matrix::MyMatrixColumn::operator[](const size_t& pos)
 {
 	return this->m_matrix_ptr_->m_matrix_[pos][this->cur_colomn_pos_];
 }
-Matrix::MyMatrixColumn& Matrix::operator()(const size_t& pos)
+Matrix::MyMatrixColumn Matrix::operator()(const size_t& pos)
 {
 	MyMatrixColumn cur_colomn(pos, this);
 	return cur_colomn;
