@@ -17,6 +17,7 @@ public:
 	Matrix operator-(const Matrix& s);
 	Matrix operator*(const Matrix& s);
 
+
 	//доп задача началоs
 	int* operator[](const size_t& pos);
 	int* operator[](const size_t& pos) const;

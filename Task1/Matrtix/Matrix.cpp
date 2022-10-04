@@ -72,7 +72,6 @@ Matrix::MyMatrixColumn Matrix::operator()(const size_t& pos)
 	return cur_colomn;
 }
 //доп задача конец
-
 Matrix Matrix::operator-(const Matrix& s)
 {
 	if (this->m_matrix_size_ != s.m_matrix_size_)

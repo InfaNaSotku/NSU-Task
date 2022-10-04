@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Task3", "Task3\Task3.vcxproj", "{9CD359E3-08E2-469D-9B8B-D9E000FB7159}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -36,6 +38,14 @@ Global
 		{ECD8B9B3-AB10-4928-ADC2-097C5E50FE77}.Release|x64.Build.0 = Release|x64
 		{ECD8B9B3-AB10-4928-ADC2-097C5E50FE77}.Release|x86.ActiveCfg = Release|Win32
 		{ECD8B9B3-AB10-4928-ADC2-097C5E50FE77}.Release|x86.Build.0 = Release|Win32
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Debug|x64.ActiveCfg = Debug|x64
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Debug|x64.Build.0 = Debug|x64
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Debug|x86.ActiveCfg = Debug|Win32
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Debug|x86.Build.0 = Debug|Win32
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Release|x64.ActiveCfg = Release|x64
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Release|x64.Build.0 = Release|x64
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Release|x86.ActiveCfg = Release|Win32
+		{9CD359E3-08E2-469D-9B8B-D9E000FB7159}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
