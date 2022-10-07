@@ -134,6 +134,9 @@
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MultiHashMap.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Task3Condition.pdf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

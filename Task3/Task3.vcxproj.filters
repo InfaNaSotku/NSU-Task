@@ -33,4 +33,7 @@
       <Filter>Файлы заголовков\Map</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Task3Condition.pdf" />
+  </ItemGroup>
 </Project>
