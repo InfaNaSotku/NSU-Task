@@ -1,10 +1,11 @@
 #pragma once
 #include<functional>
 #include<math.h>
-#include<iostream>
-using namespace std;
+#include<algorithm>
 using std::hash;
 using std::pair;
+using std::exception;
+using std::max;
 namespace MapSpace
 {
 #define MAXOCCUPANCY 80//in percents
@@ -27,14 +28,15 @@ namespace MapSpace
 			size_t element_counts_;//counts of elements in map
 			size_t max_occupancy_;//in percents
 			size_t find(const K key);
-			virtual size_t Add(const K key) = 0;
 			void resize(size_t needed_element_space);
-			size_t GetHash(const K key) { return abs(int(hash<K>{}(key))) % HASHCUT; }
+			size_t GetHash(const K key) { return abs(int(hash<K>{}(key))) % max(HASHCUT, int(this->array_size_)); }
 		public:
 			Map(const Map& source) : data_ptr_(nullptr), array_size_(NULL), element_counts_(NULL) { *this = source; }
 			Map() : data_ptr_(nullptr), array_size_(NULL), element_counts_(NULL), max_occupancy_(MAXOCCUPANCY) {}
 			Map& operator=(const Map& source);
-			V& operator[](const K key);
+			V& Get(const K key);
+			virtual Map& Add(const K key, const V val) = 0;
+			virtual Map& Delete(const K key) = 0;
 		}; 
 	tmpl
 		Map<K, V>& Map<K, V>::Map::operator=(const Map& source)
@@ -47,13 +49,13 @@ namespace MapSpace
 		return *this;
 	}
 	tmpl
-		V& Map<K, V>::operator[](const K key)
+		V& Map<K, V>::Get(const K key)
 	{
 		size_t pos = this->find(key);
-		if (pos != this->array_size_ && this->array_size_ && !this->data_ptr_[pos].fill_flag_)
+		if (pos != this->array_size_ && this->array_size_ && this->data_ptr_[pos].fill_flag_)
 			return this->data_ptr_[pos].val_;
 		else
-			return this->data_ptr_[this->Add(key)].val_;
+			throw exception("element not founded");
 	}
 	tmpl
 		void Map<K, V>::resize(size_t needed_element_space)
@@ -61,12 +63,12 @@ namespace MapSpace
 		_MyType* temp_ptr = data_ptr_;
 		size_t temp_array_size = this->array_size_;
 		this->element_counts_ = 0;
-		this->array_size_ = ceil(needed_element_space * double(100 / RESIZEOCCUPANCY));
+		this->array_size_ = (size_t)ceil(needed_element_space * double(100 / RESIZEOCCUPANCY));
 		this->data_ptr_ = new _MyType[this->array_size_];
 		for (size_t i = 0; i < temp_array_size; i++)
 		{
 			if (temp_ptr[i].fill_flag_)
-				this->Add(temp_ptr[i].key_);
+				this->Add(temp_ptr[i].key_, temp_ptr[i].val_);
 		}
 		delete[] temp_ptr;
 	}
