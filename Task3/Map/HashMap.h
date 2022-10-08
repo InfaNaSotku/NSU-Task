@@ -18,9 +18,11 @@ namespace MapSpace
 		if (this->array_size_ <= k_hash || double(this->element_counts_ / this->array_size_) * 100 >= this->max_occupancy_)
 			this->resize(max(this->element_counts_ + 1, k_hash));
 		size_t pos = this->find(key);
-		this->element_counts_++;
 		if (pos != this->array_size_)
 		{
+			//this->data_ptr_[pos].fill_flag_
+			if(!this->data_ptr_[pos].fill_flag_)
+				this->element_counts_++;
 			this->data_ptr_[pos].fill_flag_ = true;
 			this->data_ptr_[pos].key_ = key;
 			this->data_ptr_[pos].val_ = val;
@@ -34,7 +36,10 @@ namespace MapSpace
 		this->element_counts_--;
 		if (pos != this->array_size_)
 		{
-			while (this->array_size_ > pos + 1 && this->data_ptr_[pos + 1].fill_flag_)
+			//this->GetNodeState(this->data_ptr_[pos + 1]) == HashMap<K, V>::NodeState::pFULL
+			while (this->array_size_ > pos + 1 && 
+				this->data_ptr_[pos].fill_flag_ &&
+				this->GetHash(this->data_ptr_[pos + 1].key_) != pos + 1)//move elements left if needed
 			{
 				this->data_ptr_[pos] = this->data_ptr_[pos + 1];
 				pos++;
