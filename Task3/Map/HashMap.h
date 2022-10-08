@@ -2,17 +2,16 @@
 #include"Map.h"
 
 
-namespace MapSpace
-{
-	tmpl
+namespace MapSpace {
+	template<class K, class V>
 		class HashMap : public Map<K, V>
 	{
 	public:
-		Map<K, V>& Add(const K key, const V val) override;
-		Map<K, V>& Delete(const K key) override;
+		Map<K, V>& Add(K key, V val) override;
+		Map<K, V>& Delete(K key) override;
 	};
-	tmpl
-		Map<K, V>& HashMap<K, V>::Add(const K key, const V val)
+	template<class K, class V>
+		Map<K, V>& HashMap<K, V>::Add(K key, V val)
 	{
 		size_t k_hash = this->GetHash(key);
 		if (this->array_size_ <= k_hash || double(this->element_counts_ / this->array_size_) * 100 >= this->max_occupancy_)
@@ -20,8 +19,7 @@ namespace MapSpace
 		size_t pos = this->find(key);
 		if (pos != this->array_size_)
 		{
-			//this->data_ptr_[pos].fill_flag_
-			if(!this->data_ptr_[pos].fill_flag_)
+			if (!this->data_ptr_[pos].fill_flag_)
 				this->element_counts_++;
 			this->data_ptr_[pos].fill_flag_ = true;
 			this->data_ptr_[pos].key_ = key;
@@ -29,15 +27,14 @@ namespace MapSpace
 		}
 		return *this;
 	}
-	tmpl
-		Map<K, V>& HashMap<K, V>::Delete(const K key)
+	template<class K, class V>
+		Map<K, V>& HashMap<K, V>::Delete(K key)
 	{
 		size_t pos = this->find(key);
 		this->element_counts_--;
 		if (pos != this->array_size_)
 		{
-			//this->GetNodeState(this->data_ptr_[pos + 1]) == HashMap<K, V>::NodeState::pFULL
-			while (this->array_size_ > pos + 1 && 
+			while (this->array_size_ > pos + 1 &&
 				this->data_ptr_[pos].fill_flag_ &&
 				this->GetHash(this->data_ptr_[pos + 1].key_) != pos + 1)//move elements left if needed
 			{
@@ -45,7 +42,7 @@ namespace MapSpace
 				pos++;
 			}
 			this->data_ptr_[pos].fill_flag_ = false;
-			this->data_ptr_[pos].key_ = NULL;
+			this->data_ptr_[pos].key_ = K();
 			this->data_ptr_[pos].val_ = V();
 		}
 		return *this;
