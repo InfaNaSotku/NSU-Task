@@ -13,12 +13,14 @@ namespace MapSpace
 	constexpr size_t RESIZEOCCUPANCY = 50;//at the time of resize array will add as many plot as needed for occupancy was clear at ... percent
 	constexpr size_t HASHCUT = 10007;//max hash rate, prime number better than common number//lazy tamplate
 	template<class K, class V>
-		struct Node//container object type
+	struct Node//container object type
 	{
 		template<class K, class V>
 			friend class Map;
 		template<class K, class V>
 			friend class HashMap;
+		template<class K, class V>
+			friend class MultiHashMap;
 	protected:
 		bool fill_flag_;//see occupancy of plot of in container
 	public:
@@ -27,7 +29,7 @@ namespace MapSpace
 		Node() : val_(V()), fill_flag_(false), key_(K()) {}
 	};
 	template<class K, class V>
-		class Map
+	class Map
 	{
 		using Node = Node<K, V>;
 	protected:
@@ -39,7 +41,7 @@ namespace MapSpace
 		void resize(size_t needed_element_space);
 		//size_t GetHash(K key) { return 1; }
 
-		size_t GetHash(const K key) { return abs(int(hash<K>{}(key))) % max(HASHCUT, int(this->array_size_)); }
+		size_t GetHash(const K key) { return abs(int(hash<K>{}(key))) % max((int)HASHCUT, int(this->array_size_)); }
 	public:
 		class iterator
 		{
@@ -68,7 +70,7 @@ namespace MapSpace
 		iterator end() { return Map<K, V>::iterator(this, this->array_size_); }
 	};
 	template<class K, class V>
-		Map<K, V>& Map<K, V>::Map::operator=(const Map& source)
+	Map<K, V>& Map<K, V>::Map::operator=(const Map& source)
 	{
 		this->data_ptr_ = new Node[source.array_size_];
 		this->array_size_ = source.array_size_;
@@ -78,7 +80,7 @@ namespace MapSpace
 		return *this;
 	}
 	template<class K, class V>
-		V& Map<K, V>::Get(const K key)
+	V& Map<K, V>::Get(const K key)
 	{
 		size_t pos = this->find(key);
 		if (pos != this->array_size_ && this->array_size_ && this->data_ptr_[pos].fill_flag_)
@@ -87,7 +89,7 @@ namespace MapSpace
 			throw exception("element not founded");
 	}
 	template<class K, class V>
-		void Map<K, V>::resize(size_t needed_element_space)
+	void Map<K, V>::resize(size_t needed_element_space)
 	{
 		Node* temp_ptr = data_ptr_;
 		size_t temp_array_size = this->array_size_;
@@ -102,7 +104,7 @@ namespace MapSpace
 		delete[] temp_ptr;
 	}
 	template<class K, class V>
-		size_t Map<K, V>::find(K key)
+	size_t Map<K, V>::find(K key)
 	{
 		size_t i = this->GetHash(key);
 		for (; i < this->array_size_; i++)
@@ -114,14 +116,14 @@ namespace MapSpace
 	}
 	//iterator methods
 	template<class K, class V>
-		typename Map<K, V>::iterator& Map<K, V>::iterator::operator=(const iterator& source)
+	typename Map<K, V>::iterator& Map<K, V>::iterator::operator=(const iterator& source)
 	{
 		this->pos_ = source.pos_;
 		this->ptr_ = source.ptr_;
 		return *this;
 	}
 	template<class K, class V>
-		typename Map<K, V>::iterator Map<K, V>::begin()
+	typename Map<K, V>::iterator Map<K, V>::begin()
 	{
 		size_t pos = 0;
 		while (pos < this->array_size_ && !this->data_ptr_[pos].fill_flag_)
@@ -129,7 +131,7 @@ namespace MapSpace
 		return Map<K, V>::iterator(this, pos);
 	}
 	template<class K, class V>
-		typename Map<K, V>::iterator& Map<K, V>::iterator::operator++()
+	typename Map<K, V>::iterator& Map<K, V>::iterator::operator++()
 	{
 		this->pos_++;
 		while (this->pos_ < this->ptr_->array_size_ &&
@@ -138,7 +140,7 @@ namespace MapSpace
 		return *this;
 	}
 	template<class K, class V>
-		bool Map<K, V>::iterator::operator!=(const iterator& second)
+	bool Map<K, V>::iterator::operator!=(const iterator& second)
 	{
 		if (this->pos_ != second.pos_ || this->ptr_ != second.ptr_)
 			return true;

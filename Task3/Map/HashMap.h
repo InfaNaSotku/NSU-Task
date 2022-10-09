@@ -17,14 +17,15 @@ namespace MapSpace {
 		if (this->array_size_ <= k_hash || double(this->element_counts_ / this->array_size_) * 100 >= this->max_occupancy_)
 			this->resize(max(this->element_counts_ + 1, k_hash));
 		size_t pos = this->find(key);
-		if (pos != this->array_size_)
+		if (pos == this->array_size_)//we need resize again
 		{
-			if (!this->data_ptr_[pos].fill_flag_)
-				this->element_counts_++;
-			this->data_ptr_[pos].fill_flag_ = true;
-			this->data_ptr_[pos].key_ = key;
-			this->data_ptr_[pos].val_ = val;
+			throw exception("Space is ended");
 		}
+		if (!this->data_ptr_[pos].fill_flag_)
+			this->element_counts_++;
+		this->data_ptr_[pos].fill_flag_ = true;
+		this->data_ptr_[pos].key_ = key;
+		this->data_ptr_[pos].val_ = val;
 		return *this;
 	}
 	template<class K, class V>

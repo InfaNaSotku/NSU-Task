@@ -1,4 +1,5 @@
 ﻿#include"Map/HashMap.h"
+#include"Map/MultiHashMap.h"
 using namespace MapSpace;
 #include<string>
 #include<iostream>
@@ -34,7 +35,8 @@ void solve(HashMap<K, V> arr)
 	}
 	cout << heap.size();
 }
-int main()
+
+void MainSolve()
 {
 	char key, val;
 	cin >> key >> val;
@@ -65,7 +67,40 @@ int main()
 		else if (val == 'S')
 			solve(HashMap<string, string>());
 	}
-	
+}
 
+void AdditionalSolve()
+{
+	MultiHashMap<string, int> arr;
+	arr.Add("Max", 5);
+	arr.Add("Max", 6);
+	arr.Add("Max", 152);
+	arr.Add("Jora", 2);
+	//
+	cout << arr.GetK("Max")[0] << ' ';
+	arr.GetK("Max")[0] = 3;
+	cout << arr.GetK("Max")[0] << ' ';
+	cout << arr.GetK("Max")[1];
+	cout << endl << endl;
+	//
+	cout << "Max counts:" << arr.SizeK("Max") << ' ' << "Jora counts:" << arr.SizeK("Jora") << endl;
+	for (auto& it : arr)
+		cout << it.key_ << ' ' << it.val_ << endl;
+	arr.Delete("Max");
+	cout << "------------------------------------------------------" << endl;
+	cout << "Max counts:" << arr.SizeK("Max") << ' ' << "Jora counts:" << arr.SizeK("Jora") << endl;
+	for (auto& it : arr)
+		cout << it.key_ << ' ' << it.val_ << endl;
+	cout << "------------------------------------------------------" << endl;\
+	arr.Delete("Jora");
+	cout << "Max counts:" << arr.SizeK("Max") << ' ' << "Jora counts:" << arr.SizeK("Jora") << endl;
+	for (auto& it : arr)
+		cout << it.key_ << ' ' << it.val_ << endl;
+}
+
+int main()
+{
+	//MainSolve();
+	//AdditionalSolve();
 	return 0;
 }
