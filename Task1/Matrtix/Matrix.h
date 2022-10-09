@@ -1,6 +1,12 @@
 #pragma once
 #include<iostream>
-using namespace std;
+using std::istream;
+using std::ostream;
+using std::cin;
+using std::exception;
+using std::endl;
+using std::cout;
+
 class Matrix
 {
 private:
@@ -8,10 +14,10 @@ private:
 	size_t m_matrix_size_;
 	void Init(const size_t& matrix_size, int* diag_ptr);
 public:
-	Matrix() : m_matrix_size_(NULL), m_matrix_(NULL) {}
+	Matrix() : m_matrix_size_(0), m_matrix_(nullptr) {}
 	Matrix(const size_t& matrix_size);
 	Matrix(const size_t& matrix_size, int* diag_ptr) { Init(matrix_size, diag_ptr); }
-	Matrix(Matrix& matrix) : m_matrix_size_(NULL), m_matrix_(NULL) { *this = matrix; }
+	Matrix(const Matrix& matrix) : m_matrix_size_(0), m_matrix_(nullptr) { *this = matrix; }
 	~Matrix();
 	Matrix operator+(const Matrix& s);
 	Matrix operator-(const Matrix& s);
@@ -43,4 +49,19 @@ public:
 	friend ostream& operator<<(ostream& output, const Matrix& matrix);
 
 	Matrix operator()(const size_t& line_pos, const size_t& column_pos);
+
+	size_t GetHash() const;
 };
+
+
+namespace std
+{
+	template<>
+	struct hash<Matrix>
+	{
+		size_t operator()(const Matrix& k) const
+		{
+			return k.GetHash();
+		}
+	};
+}

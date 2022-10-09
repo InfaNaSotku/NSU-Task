@@ -23,7 +23,7 @@ void Matrix::Init(const size_t& matrix_size, int* diag_ptr)
 {
 	if (!matrix_size)
 	{
-		throw invalid_argument("Bad size");
+		throw exception("Bad size");
 	}
 	this->m_matrix_size_ = matrix_size;
 	int** temp_matrix = new int* [matrix_size];
@@ -50,7 +50,7 @@ int* Matrix::operator[](const size_t& pos)
 {
 	if (pos < 0 || pos >= this->m_matrix_size_)
 	{
-		throw invalid_argument("Bad size");
+		throw exception("Bad size");
 	}
 	return this->m_matrix_[pos];
 }
@@ -58,7 +58,7 @@ int* Matrix::operator[](const size_t& pos) const
 {
 	if (pos < 0 || pos >= this->m_matrix_size_)
 	{
-		throw invalid_argument("Bad size");
+		throw exception("Bad size");
 	}
 	return this->m_matrix_[pos];
 }
@@ -76,7 +76,7 @@ Matrix Matrix::operator-(const Matrix& s)
 {
 	if (this->m_matrix_size_ != s.m_matrix_size_)
 	{
-		throw invalid_argument("The size of the matrices must be equal");
+		throw exception("The size of the matrices must be equal");
 	}
 	Matrix temp(this->m_matrix_size_);
 	for (size_t i = 0; i < this->m_matrix_size_; i++)
@@ -92,7 +92,7 @@ Matrix Matrix::operator+(const Matrix& s)
 {
 	if (this->m_matrix_size_ != s.m_matrix_size_)
 	{
-		throw invalid_argument("The size of the matrices must be equal");
+		throw exception("The size of the matrices must be equal");
 	}
 	Matrix temp(this->m_matrix_size_);
 	for (size_t i = 0; i < this->m_matrix_size_; i++)
@@ -108,7 +108,7 @@ Matrix Matrix::operator*(const Matrix& s)
 {
 	if (this->m_matrix_size_ != s.m_matrix_size_)
 	{
-		throw invalid_argument("The size of the matrices must be equal");
+		throw exception("The size of the matrices must be equal");
 	}
 	Matrix temp(this->m_matrix_size_);
 	for (size_t i = 0; i < this->m_matrix_size_; i++)
@@ -211,7 +211,7 @@ istream& operator>>(istream& input, Matrix& matrix)
 	}
 	if (!matrix_size)
 	{
-		throw invalid_argument("Bad size");
+		throw exception("Bad size");
 	}
 	Matrix temp(matrix_size);
 	for (size_t i = 0; i < matrix_size; i++)
@@ -242,7 +242,7 @@ Matrix Matrix::operator()(const size_t& line_pos, const size_t& column_pos)
 {
 	if (line_pos < 0 || line_pos >= this->m_matrix_size_ || column_pos < 0 || column_pos >= this->m_matrix_size_)
 	{
-		throw invalid_argument("Bad pos");
+		throw exception("Bad pos");
 	}
 	Matrix temp(this->m_matrix_size_ - 1);
 	size_t temp_i = 0, temp_j = 0;
@@ -264,4 +264,11 @@ Matrix Matrix::operator()(const size_t& line_pos, const size_t& column_pos)
 		temp_i++;
 	}
 	return temp;
+}
+
+size_t Matrix::GetHash() const
+{
+	size_t h1 = std::hash<int**>{}(this->m_matrix_);
+	size_t h2 = std::hash<size_t>{}(this->m_matrix_size_);
+	return h1 ^ (h2 << 1);
 }
