@@ -127,9 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Task1\Matrtix\Matrix.cpp" />
     <ClCompile Include="Task3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Task1\Matrtix\Matrix.h" />
     <ClInclude Include="Map\HashMap.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MultiHashMap.h" />

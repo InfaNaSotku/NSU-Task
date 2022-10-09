@@ -1,5 +1,6 @@
 ﻿#include"Map/HashMap.h"
 #include"Map/MultiHashMap.h"
+#include"../Task1/Matrtix/Matrix.h"
 using namespace MapSpace;
 #include<string>
 #include<iostream>
@@ -96,6 +97,18 @@ void AdditionalSolve()
 	cout << "Max counts:" << arr.SizeK("Max") << ' ' << "Jora counts:" << arr.SizeK("Jora") << endl;
 	for (auto& it : arr)
 		cout << it.key_ << ' ' << it.val_ << endl;
+	cout << endl;
+	//
+	Matrix kek(10);
+	HashMap<Matrix, int> newarr;
+	kek[0][0] = 2;
+	newarr.Add(kek, 2);
+	newarr.Add(Matrix(10), 3);
+	for (auto& it : newarr)
+	{
+		cout << it.key_ << it.val_ << endl;
+	}
+
 }
 
 int main()

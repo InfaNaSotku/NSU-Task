@@ -16,10 +16,19 @@
     <Filter Include="Файлы заголовков\Map">
       <UniqueIdentifier>{7a015454-5a03-46a0-9412-4882bdfd08c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Matrix">
+      <UniqueIdentifier>{2894e635-1fe8-4e3e-ab1d-5c7a6edeafa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Matrix">
+      <UniqueIdentifier>{843cce80-31bb-482e-9ba8-a2495922d3d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Task3.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Task1\Matrtix\Matrix.cpp">
+      <Filter>Исходные файлы\Matrix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +40,9 @@
     </ClInclude>
     <ClInclude Include="Map\MultiHashMap.h">
       <Filter>Файлы заголовков\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Task1\Matrtix\Matrix.h">
+      <Filter>Файлы заголовков\Matrix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
