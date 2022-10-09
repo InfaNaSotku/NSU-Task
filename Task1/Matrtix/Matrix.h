@@ -6,7 +6,8 @@ using std::cin;
 using std::exception;
 using std::endl;
 using std::cout;
-
+constexpr long long base1 = 111;
+constexpr long long base2 = 111;
 class Matrix
 {
 private:

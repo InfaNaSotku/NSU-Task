@@ -268,7 +268,13 @@ Matrix Matrix::operator()(const size_t& line_pos, const size_t& column_pos)
 
 size_t Matrix::GetHash() const
 {
-	size_t h1 = std::hash<int**>{}(this->m_matrix_);
-	size_t h2 = std::hash<size_t>{}(this->m_matrix_size_);
-	return h1 ^ (h2 << 1);
+	long long hash = 0;
+	for (int i = 0; i < this->m_matrix_size_; ++i)
+	{
+		long long s = 0;
+		for (int j = 0; j < this->m_matrix_size_; ++j)
+			s = s * base1 + this->m_matrix_[i][j];
+		hash = hash * base2 + s;
+	}
+	return hash % SIZE_MAX;
 }
