@@ -44,20 +44,29 @@ namespace MapSpace
 	Map<K, V>& MultiHashMap<K, V>::Delete(K key)
 	{
 		size_t pos = this->find(key);
-		this->element_counts_--;
-		while (pos != this->array_size_ && this->data_ptr_[pos].key_ == key)
+		if (pos != this->array_size_ && this->data_ptr_[pos].fill_flag_)
 		{
-			size_t shift = pos;
-			while (this->array_size_ > shift + 1 &&
-				this->data_ptr_[shift].fill_flag_ &&
-				this->GetHash(this->data_ptr_[shift + 1].key_) != shift + 1)//move elements left if needed
+			while (pos != this->array_size_ && this->data_ptr_[pos].key_ == key)
 			{
-				this->data_ptr_[shift] = this->data_ptr_[shift + 1];
-				shift++;
+				this->element_counts_--;
+				this->data_ptr_[pos].fill_flag_ = false;
+				this->data_ptr_[pos].key_ = K();
+				this->data_ptr_[pos].val_ = V();
+				pos++;
 			}
-			this->data_ptr_[shift].fill_flag_ = false;
-			this->data_ptr_[shift].key_ = K();
-			this->data_ptr_[shift].val_ = V();
+			pos++;
+			while (this->array_size_ > pos + 1 &&
+				this->data_ptr_[pos].fill_flag_)//move elements left if needed
+			{
+				this->element_counts_--;
+				K temp_key = this->data_ptr_[pos].key_;
+				V temp_val = this->data_ptr_[pos].val_;
+				this->data_ptr_[pos].fill_flag_ = false;
+				this->data_ptr_[pos].key_ = K();
+				this->data_ptr_[pos].val_ = V();
+				this->Add(temp_key, temp_val);
+				pos++;
+			}
 		}
 		return *this;
 	}
