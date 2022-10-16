@@ -32,19 +32,25 @@ namespace MapSpace {
 		Map<K, V>& HashMap<K, V>::Delete(K key)
 	{
 		size_t pos = this->find(key);
-		this->element_counts_--;
-		if (pos != this->array_size_)
+		if (pos != this->array_size_ && this->data_ptr_[pos].fill_flag_)
 		{
-			while (this->array_size_ > pos + 1 &&
-				this->data_ptr_[pos].fill_flag_ &&
-				this->GetHash(this->data_ptr_[pos + 1].key_) != pos + 1)//move elements left if needed
-			{
-				this->data_ptr_[pos] = this->data_ptr_[pos + 1];
-				pos++;
-			}
+			this->element_counts_--;
 			this->data_ptr_[pos].fill_flag_ = false;
 			this->data_ptr_[pos].key_ = K();
 			this->data_ptr_[pos].val_ = V();
+			pos++;
+			while (this->array_size_ > pos + 1 &&
+				this->data_ptr_[pos].fill_flag_)//move elements left if needed
+			{
+				this->element_counts_--;
+				K temp_key = this->data_ptr_[pos].key_;
+				V temp_val = this->data_ptr_[pos].val_;
+				this->data_ptr_[pos].fill_flag_ = false;
+				this->data_ptr_[pos].key_ = K();
+				this->data_ptr_[pos].val_ = V();
+				this->Add(temp_key, temp_val);
+				pos++;
+			}
 		}
 		return *this;
 	}
