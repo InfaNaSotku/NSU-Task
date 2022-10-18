@@ -15,7 +15,7 @@ protected:
 				считаем, что на вход подается Польская нотация формулы\
 				!!!Эта функция - обертка функции parseCh
 public:
-	virtual ~Expression() {}
+	virtual ~Expression() = default;
 	enum class Type
 	{
 		pAdd,
