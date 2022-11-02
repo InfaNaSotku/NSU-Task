@@ -1,20 +1,106 @@
-﻿// Task4.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include"StateMachine/StateMachine.h"
+#include<fstream>
+using namespace StateMachine;
+using namespace std;
 
-#include <iostream>
+
+
+
+void MainSolve()
+{
+	int n;
+	cin >> n;
+	Machine m(n, Machine::MachineUpdateTypeState::pDYNAMICAL);
+	int k;
+	cin >> k; 
+	m.SetInitialCondition(k);
+	int f;
+	cin >> f;
+	for (size_t i = 0; i < f; i++)
+	{
+		int fi;
+		cin >> fi;
+		m.SetFinalCondition(fi);
+	}
+	int p;
+	cin >> p;
+	for (size_t i = 0; i < p; i++)
+	{
+		int from, to;
+		char val;
+		cin >> from >> to >> val;
+		m.UpdateTransition(from, to, val);
+	}
+	Machine m1(Machine::Determinise(m));
+	int t;
+	cin >> t;	
+	for (size_t i = 0; i < t; i++)
+	{
+		string str;
+	    cin >> str;
+		if (m1.CheckRecognizability(str))
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+}
+
+void AdditionalSolve()
+{
+	ifstream fin;
+	fin.open("input.txt");
+	int n;
+	fin >> n;
+	Machine m(n, Machine::MachineUpdateTypeState::pDYNAMICAL);
+	int k;
+	fin >> k;
+	m.SetInitialCondition(k);
+	int f;
+	fin >> f;
+	for (size_t i = 0; i < f; i++)
+	{
+		int fi;
+		fin >> fi;
+		m.SetFinalCondition(fi);
+	}
+	int p;
+	fin >> p;
+	for (size_t i = 0; i < p; i++)
+	{
+		int from, to;
+		char val;
+		fin >> from >> to >> val;
+		m.UpdateTransition(from, to, val);
+	}
+	m.print(cout);
+	cout << "--------------------------------------" << endl;
+	Machine m1(Machine::Determinise(m));
+	m1.print(cout);
+	cout << "--------------------------------------" << endl;
+
+	string s;
+	cin >> s;
+	Machine::parse(s).print(cout);
+	cout << "--------------------------------------" << endl;
+	int t;
+	cin >> t;
+	for (size_t i = 0; i < t; i++)
+	{
+		string str;
+		cin >> str;
+		if (m1.CheckRecognizability(str))
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+	fin.close();
+}
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	MainSolve();
+	//AdditionalSolve();
+	return 0;
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.

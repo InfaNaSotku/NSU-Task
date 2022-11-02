@@ -18,8 +18,16 @@
     <ClCompile Include="Task4.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachine\StateMachine.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Task4Condition.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StateMachine\StateMachine.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
