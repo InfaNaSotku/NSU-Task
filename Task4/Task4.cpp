@@ -99,8 +99,8 @@ void AdditionalSolve()
 
 int main()
 {
-	//MainSolve();
-	AdditionalSolve();
+	MainSolve();
+	//AdditionalSolve();
 	return 0;
 }
 
