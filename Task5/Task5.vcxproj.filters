@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Crawler\Crawler.h">
+    <ClInclude Include="CMP\CMP.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="CMP\CMP.h">
+    <ClInclude Include="Crawler\Crawler.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
