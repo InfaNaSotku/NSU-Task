@@ -66,7 +66,7 @@ namespace CrawlerSpace
 		}
 	}
 
-	void Crawler::work(string output_folder, queue<string>& p_q, 
+	void Crawler::work(string input_folder, string output_folder, queue<string>& p_q, 
 		map<string, bool>& passed_page, atomic<size_t>& running_workers_number)
 	{
 		bool running_state = true;
@@ -91,7 +91,7 @@ namespace CrawlerSpace
 				vector<string> result;
 				//parsing
 				ifstream page;
-				page.open(FILEPATH + cur_page);
+				page.open(input_folder + "/" + cur_page);
 				if (!page.good())
 					throw exception("open file error");
 				ParsePage(page, result);
@@ -99,17 +99,13 @@ namespace CrawlerSpace
 				//parsing
 				Crawler::visited_counts.fetch_add(1, std::memory_order_seq_cst);
 				Crawler::m_.lock();
-				filesystem::path input_folder = filesystem::current_path();
-				input_folder += ("/" + string(FILEPATH));
 				for (auto& it : result)
 				{
 					if (!passed_page[it])
 					{
 						passed_page[it] = true;
 						p_q.push(it);
-						filesystem::path cur_input_path = input_folder;
-						cur_input_path += it;
-						filesystem::copy(cur_input_path, output_folder);
+						filesystem::copy(input_folder + "/" + it, output_folder);
 					}
 				} 
 				Crawler::m_.unlock();
@@ -118,16 +114,13 @@ namespace CrawlerSpace
 		
 	}
 
-	void Crawler::RunCrawler(size_t th_counts, string start_source, string output_folder)
+	void Crawler::RunCrawler(size_t th_counts, string start_source, string input_folder, string output_folder)
 	{
 		this->work_time = 0;
 		Crawler::visited_counts = 0;
 
 		chrono::steady_clock::time_point start = chrono::steady_clock::now();
-
-		filesystem::path input_folder = filesystem::current_path();
-		input_folder += ("/" + string(FILEPATH) + start_source);
-		filesystem::copy(input_folder, output_folder);
+		filesystem::copy(input_folder + "/" + start_source, output_folder);
 
 		if (Crawler::cr_state_.load(std::memory_order_seq_cst))
 		{
@@ -142,7 +135,7 @@ namespace CrawlerSpace
 		passed_page[start_source] = true;
 		Crawler::cr_state_.store(true, std::memory_order_seq_cst);
 		for (size_t i = 0; i < th_counts; i++)
-			workers.push_back(thread(this->work, output_folder, ref(p_q), ref(passed_page), 
+			workers.push_back(thread(this->work, input_folder, output_folder, ref(p_q), ref(passed_page), 
 				ref(running_workers_number)));
 		for (size_t i = 0; i < th_counts; i++)
 			workers[i].join();
